@@ -10,13 +10,13 @@ $timestamps = array(@getlastmod());
    the display of the index page). The cost of stat'ing
    them all is prohibitive.
 */
-$timestamps[] = @filemtime("include/prepend.inc");
+$timestamps[] = @filemtime(__DIR__ . "/../../public/include/prepend.inc");
 
 // These are the only dynamic parts of the frontpage
-$timestamps[] = @filemtime("include/pregen-confs.inc");
-$timestamps[] = @filemtime("include/pregen-news.inc");
-$timestamps[] = @filemtime("include/version.inc");
-$timestamps[] = @filemtime("js/common.js");
+$timestamps[] = @filemtime(__DIR__ . "/../../public/include/pregen-confs.inc");
+$timestamps[] = @filemtime(__DIR__ . "/../../public/include/pregen-news.inc");
+$timestamps[] = @filemtime(__DIR__ . "/../../public/include/version.inc");
+$timestamps[] = @filemtime(__DIR__ . "/../../public/js/common.js");
 
 // The latest of these modification dates is our real Last-Modified date
 $timestamp = max($timestamps);
@@ -36,18 +36,18 @@ else {
 }
 
 $_SERVER['BASE_PAGE'] = 'index.php';
+
 include_once __DIR__ . '/../../public/include/prepend.inc';
 include_once __DIR__ . '/../../public/include/branches.inc';
-include_once __DIR__ . '/../../public/include/pregen-confs.inc';
-include_once __DIR__ . '/../../public/include/pregen-news.inc';
 include_once __DIR__ . '/../../public/include/version.inc';
 
 mirror_setcookie("LAST_NEWS", $_SERVER["REQUEST_TIME"], 60*60*24*365);
 
 
-$content = "<div class='home-content'>";
+$content     = "<div class='home-content'>";
 $releasenews = 0;
-$frontpage = array();
+$frontpage   = array();
+
 foreach($NEWS_ENTRIES as $entry) {
     $maybe = false;
     foreach($entry["category"] as $category) {

@@ -24,6 +24,8 @@ class Renderer
      */
     public function render($template, $variables = array())
     {
+        extract($variables, EXTR_SKIP);
+
         ob_start();
 
         include_once __DIR__ . "/../../Views/$template";
