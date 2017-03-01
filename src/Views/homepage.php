@@ -37,9 +37,6 @@ else {
 
 $_SERVER['BASE_PAGE'] = 'index.php';
 
-include_once __DIR__ . '/../../public/include/prepend.inc';
-include_once __DIR__ . '/../../public/include/branches.inc';
-include_once __DIR__ . '/../../public/include/version.inc';
 
 mirror_setcookie("LAST_NEWS", $_SERVER["REQUEST_TIME"], 60*60*24*365);
 
