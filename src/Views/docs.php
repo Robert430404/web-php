@@ -38,25 +38,19 @@
         <tr>
             <th class="sub">View Online</th>
             <td>
-                <?php
-
-                // List all manual languages viewable online
-                $lastlang = end($ACTIVE_ONLINE_LANGUAGES);
-                foreach ($ACTIVE_ONLINE_LANGUAGES as $langcode => $langname) {
-                    if (!file_exists($_SERVER["DOCUMENT_ROOT"] . "/manual/{$langcode}/index.php")) {
+                <?php foreach ($activeLangs as $langcode => $langname) :
+                    if (!file_exists($_SERVER["DOCUMENT_ROOT"] . "/manual/{$langcode}/index.php")) :
                         continue;
-                    }
-
-                    // Make preferred language bold
-                    if ($langcode == $LANG) { echo "<strong>"; }
-
-                    echo '<a href="/manual/' . $langcode . '/">' . $langname . '</a>';
-                    echo ($lastlang != $langname) ? ",\n" : "\n";
-
-                    if ($langcode == $LANG) { echo "</strong>"; }
-                }
-
+                    endif;
                 ?>
+                    <?php if ($langcode == $LANG) : // Make preferred language bold ?>
+                        <strong>
+                    <?php endif; ?>
+                        <a href="/manual/<?= $langcode; ?>/"><?= $langname; ?></a><?php echo ($lastlang != $langname) ? ",\n" : "\n"; ?>
+                    <?php if ($langcode == $LANG) : ?>
+                        </strong>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </td>
         </tr>
         <tr>

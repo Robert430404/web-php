@@ -15,6 +15,7 @@ $renderer->render('docs', array(
     'headerConfig'  => array(
         "current" => "docs",
     ),
-    'ACTIVE_ONLINE_LANGUAGES' => $ACTIVE_ONLINE_LANGUAGES,
-    'LANG' => $LANG,
+    'activeLangs' => $ACTIVE_ONLINE_LANGUAGES,
+    'LANG'     => $LANG,
+    'lastlang' => end($ACTIVE_ONLINE_LANGUAGES)
 ));
