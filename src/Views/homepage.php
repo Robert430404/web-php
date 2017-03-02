@@ -89,6 +89,7 @@ site_header("Hypertext Preprocessor",
   <p class="archive"><a href="/archive/">Older News Entries</a></p>
 </div>
 <?php
+
 $SIDEBAR = "
   $announcements
   <p class='panel'><a href='/cal.php'>User Group Events</a></p>

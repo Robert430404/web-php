@@ -56,22 +56,36 @@ class HomepageMappers
     public function mapAnnouncements($rawAnnouncements)
     {
         if (is_array($rawAnnouncements)) {
-            $conftype = array(
+            $conftype     = array(
                 'conference' => 'Upcoming conferences',
                 'cfp'        => 'Conferences calling for papers',
             );
             $announcements = "";
+
             foreach($rawAnnouncements as $category => $entries) {
                 if ($entries) {
-                    $announcements .= '<div class="panel">';
-                    $announcements .= '  <a href="/conferences" class="headline" title="' . $conftype[$category] . '">' . $conftype[$category] .'</a>';
-                    $announcements .= '<div class="body"><ul>';
+                    $announcements .= '
+                      <div class="panel">
+                        <a href="/conferences" class="headline" title="' . $conftype[$category] . '">'
+                          . $conftype[$category] .
+                        '</a>
+                        <div class="body">
+                          <ul>';
+
                     foreach (array_slice($entries, 0, 4) as $url => $title) {
-                        $title = preg_replace("'([A-Za-z0-9])([\s\:\-\,]*?)call for(.*?)$'i", "$1", $title);
-                        $announcements .= "<li><a href='$url' title='$title'>$title</a></li>";
+                        $title          = preg_replace("'([A-Za-z0-9])([\s\:\-\,]*?)call for(.*?)$'i", "$1", $title);
+                        $announcements .= "
+                          <li>
+                            <a href='$url' title='$title'>
+                              $title
+                            </a>
+                          </li>";
                     }
-                    $announcements .= '</ul></div>';
-                    $announcements .= '</div>';
+
+                    $announcements .= '
+                        </ul>
+                      </div>
+                    </div>';
                 }
             }
         } else {
