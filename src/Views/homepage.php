@@ -34,7 +34,7 @@ $intro .= '
     </div>
   </div>';
 
-// Write out common header
+// Write out common header TODO: convert this call into a header partials
 site_header("Hypertext Preprocessor",
     array(
         'current' => 'home',
@@ -108,12 +108,13 @@ $SIDEBAR = "
     </div>
   </p>";
 
-// Print the common footer.
-site_footer(
-    array(
-        "atom" => "/feed.atom", // Add a link to the feed at the bottom
-        'elephpants' => true,
-        'sidebar' => $SIDEBAR
-    )
-);
+// Print the common footer. TODO: convert this call into a footer partials
+//site_footer(
+//    array(
+//        "atom" => "/feed.atom", // Add a link to the feed at the bottom
+//        'elephpants' => true,
+//        'sidebar' => $SIDEBAR
+//    )
+//);
 
+require_once __DIR__ . '/Partials/footer.php';
