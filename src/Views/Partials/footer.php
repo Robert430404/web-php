@@ -52,7 +52,9 @@ if (!empty($footerConfig['spanning-content'])) {
 <?php endif; ?>
 
 <?php if (isset($footerConfig['sidebar']) && $footerConfig['sidebar'] === true): ?>
-    <?php require_once __DIR__ . '/sidebar.php'; ?>
+    <aside class="tips">
+        <div class="inner"><?php echo $sidebar; ?></div>
+    </aside>
 <?php endif; ?>
 
 </div><!-- layout -->
