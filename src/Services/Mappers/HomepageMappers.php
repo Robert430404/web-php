@@ -2,6 +2,8 @@
 
 namespace Services\Mappers;
 
+use DateTime;
+
 /**
  * Class HomepageMappers
  *
@@ -24,11 +26,13 @@ class HomepageMappers
      */
     public function mapNewsEntries($entries)
     {
+        //new DateTime($entry['updated']);
         $releasenews = 0;
         $frontpage   = array();
 
         foreach($entries as $entry) {
             $maybe = false;
+
             foreach($entry["category"] as $category) {
                 if ($category["term"] == "releases") {
                     if ($releasenews++ > 5) {
@@ -40,7 +44,11 @@ class HomepageMappers
                 }
             }
             if ($maybe) {
-                $frontpage[] = $maybe;
+                $maybe['striped_link']     = str_replace('http://php.net/', '', $entry["id"]);
+                $maybe['parsed_id']        = parse_url($entry["id"], PHP_URL_FRAGMENT);
+                $maybe['updated_date_obj'] = new DateTime($entry['updated']);
+
+                $frontpage[]           = $maybe;
             }
         }
 

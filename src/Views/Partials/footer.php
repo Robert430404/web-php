@@ -50,6 +50,7 @@ if (!empty($footerConfig['spanning-content'])) {
         </ul>
     </aside>
 <?php endif; ?>
+
 <?php if (isset($footerConfig['sidebar']) && $footerConfig['sidebar'] === true): ?>
     <?php require_once __DIR__ . '/sidebar.php'; ?>
 <?php endif; ?>

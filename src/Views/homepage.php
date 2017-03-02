@@ -38,22 +38,20 @@ include_once __DIR__ . '/Partials/header.php';
 ?>
 
 <div class="home-content">
-<?php foreach($frontpage as $entry) :
-    $link       = substr($entry["id"], 15); // Strip http://php.net/ TODO: remove magic integer
-    $id         = parse_url($entry["id"], PHP_URL_FRAGMENT);
-    $date       = date_create($entry['updated']);
-    $date_human = date_format($date, 'd M Y');
-    $date_w3c   = date_format($date, DATE_W3C);
-?>
+<?php foreach($frontpage as $entry) : ?>
   <article class="newsentry">
     <header class="title">
-      <time datetime="<?= $date_w3c ?>"><?= $date_human ?></time>
+      <time datetime="<?php echo $entry['updated_date_obj']->format(DATE_W3C) ?>">
+        <?php echo $entry['updated_date_obj']->format('d M Y') ?>
+      </time>
       <h2 class="newstitle">
-        <a href="<?= $MYSITE; ?><?= $link; ?>" id="<?= $id ?>"><?= $entry["title"] ?></a>
+        <a href="<?php echo $MYSITE; ?><?php echo $entry['striped_link']; ?>" id="<?php echo $entry['parsed_id'] ?>">
+          <?php echo $entry["title"] ?>
+        </a>
       </h2>
     </header>
     <div class="newscontent">
-      <?= $entry["content"] ?>
+      <?php echo $entry["content"] ?>
     </div>
   </article>
 <?php endforeach; ?>

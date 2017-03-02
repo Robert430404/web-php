@@ -46,7 +46,7 @@
                     <?php if ($langcode == $LANG) : // Make preferred language bold ?>
                         <strong>
                     <?php endif; ?>
-                        <a href="/manual/<?= $langcode; ?>/"><?= $langname; ?></a><?php echo ($lastlang != $langname) ? ",\n" : "\n"; ?>
+                        <a href="/manual/<?php echo $langcode; ?>/"><?php echo $langname; ?></a><?php echo ($lastlang != $langname) ? ",\n" : "\n"; ?>
                     <?php if ($langcode == $LANG) : ?>
                         </strong>
                     <?php endif; ?>
