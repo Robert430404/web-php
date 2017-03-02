@@ -11,18 +11,16 @@ use Services\Cache\Modified;
 use Services\Mappers\HomepageMappers;
 use Services\Templates\Renderer;
 
-$renderer = new Renderer();
-$mapper   = new HomepageMappers();
-$modified = new Modified();
+$_SERVER['BASE_PAGE'] = 'index.php';
+$renderer             = new Renderer();
+$mapper               = new HomepageMappers();
+$modified             = new Modified();
 
 $frontpage     = $mapper->mapNewsEntries($NEWS_ENTRIES);
 $announcements = $mapper->mapAnnouncements($CONF_TEASER);
 $tsstring      = $mapper->getTimestampString();
 
 $modified->checkModifiedHeaders($tsstring);
-
-$_SERVER['BASE_PAGE'] = 'index.php';
-
 mirror_setcookie("LAST_NEWS", $_SERVER["REQUEST_TIME"], 60*60*24*365);
 
 $renderer->render('homepage.php', array(
