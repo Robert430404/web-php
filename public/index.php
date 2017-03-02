@@ -47,58 +47,17 @@ $_SERVER['BASE_PAGE'] = 'index.php';
 
 mirror_setcookie("LAST_NEWS", $_SERVER["REQUEST_TIME"], 60*60*24*365);
 
-$releasenews = 0;
-$frontpage   = array();
-
-foreach($NEWS_ENTRIES as $entry) {
-    $maybe = false;
-    foreach($entry["category"] as $category) {
-        if ($category["term"] == "releases") {
-            if ($releasenews++ > 5) {
-                continue 2;
-            }
-        }
-        if ($category["term"] == "frontpage") {
-            $maybe = $entry;
-        }
-    }
-    if ($maybe) {
-        $frontpage[] = $maybe;
-    }
-}
-
-// Prepare announcements.
-if (is_array($CONF_TEASER)) {
-    $conftype = array(
-        'conference' => 'Upcoming conferences',
-        'cfp'        => 'Conferences calling for papers',
-    );
-    $announcements = "";
-    foreach($CONF_TEASER as $category => $entries) {
-        if ($entries) {
-            $announcements .= '<div class="panel">';
-            $announcements .= '  <a href="/conferences" class="headline" title="' . $conftype[$category] . '">' . $conftype[$category] .'</a>';
-            $announcements .= '<div class="body"><ul>';
-            foreach (array_slice($entries, 0, 4) as $url => $title) {
-                $title = preg_replace("'([A-Za-z0-9])([\s\:\-\,]*?)call for(.*?)$'i", "$1", $title);
-                $announcements .= "<li><a href='$url' title='$title'>$title</a></li>";
-            }
-            $announcements .= '</ul></div>';
-            $announcements .= '</div>';
-        }
-    }
-} else {
-    $announcements = '';
-}
-
+use Services\Mappers\HomepageMappers;
 use Services\Templates\Renderer;
 
 $renderer = new Renderer();
+$mapper   = new HomepageMappers();
+
+$frontpage     = $mapper->mapNewsEntries($NEWS_ENTRIES);
+$announcements = $mapper->mapAnnouncements($CONF_TEASER);
 
 $renderer->render('homepage.php', array(
-    'NEWS_ENTRIES' => $NEWS_ENTRIES,
-    'CONF_TEASER'  => $CONF_TEASER,
-    'MYSITE'       => $MYSITE,
-    'frontpage'    => $frontpage,
+    'MYSITE'        => $MYSITE,
+    'frontpage'     => $frontpage,
     'announcements' => $announcements,
 ));
