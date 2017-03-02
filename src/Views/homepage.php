@@ -1,6 +1,4 @@
-<?php
-$intro = require_once __DIR__ . '/Partials/Intros/homepageIntro.php';
-         require_once __DIR__ . '/Partials/header.php'; ?>
+<?php $this->loadPartial('header'); ?>
 
     <div class="home-content">
         <?php foreach ($frontpage as $entry) : ?>
@@ -23,5 +21,4 @@ $intro = require_once __DIR__ . '/Partials/Intros/homepageIntro.php';
         <?php endforeach; ?>
         <p class="archive"><a href="/archive/">Older News Entries</a></p>
     </div>
-<?php $SIDEBAR = require_once __DIR__ . '/Partials/Sidebars/homepageSidebar.php';
-      require_once __DIR__ . '/Partials/footer.php'; ?>
+<?php $this->loadPartial('footer'); ?>

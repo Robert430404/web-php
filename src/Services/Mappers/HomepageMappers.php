@@ -47,7 +47,7 @@ class HomepageMappers
                 $maybe['parsed_id']        = parse_url($entry["id"], PHP_URL_FRAGMENT);
                 $maybe['updated_date_obj'] = new DateTime($entry['updated']);
 
-                $frontpage[]           = $maybe;
+                $frontpage[] = $maybe;
             }
         }
 
@@ -63,18 +63,18 @@ class HomepageMappers
     public function mapAnnouncements($rawAnnouncements)
     {
         if (is_array($rawAnnouncements)) {
-            $conftype     = array(
+            $conferenceType = array(
                 'conference' => 'Upcoming conferences',
                 'cfp'        => 'Conferences calling for papers',
             );
-            $announcements = "";
+            $announcements  = "";
 
             foreach($rawAnnouncements as $category => $entries) {
                 if ($entries) {
                     $announcements .= '
                       <div class="panel">
-                        <a href="/conferences" class="headline" title="' . $conftype[$category] . '">'
-                          . $conftype[$category] .
+                        <a href="/conferences" class="headline" title="' . $conferenceType[$category] . '">'
+                          . $conferenceType[$category] .
                         '</a>
                         <div class="body">
                           <ul>';

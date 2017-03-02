@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/Partials/header.php'?>
+<?php $this->loadPartial('header'); ?>
 
     <h1>Documentation</h1>
     <div class="content-box">
@@ -38,11 +38,10 @@
         <tr>
             <th class="sub">View Online</th>
             <td>
-                <?php foreach ($activeLangs as $langcode => $langname) :
-                    if (!file_exists($_SERVER["DOCUMENT_ROOT"] . "/manual/{$langcode}/index.php")) :
+                <?php foreach ($activeLangs as $langcode => $langname) : ?>
+                    <?php if (!file_exists(__DIR__ . "/../../public/manual/$langcode/index.php")) :
                         continue;
-                    endif;
-                ?>
+                    endif; ?>
                     <?php if ($langcode == $LANG) : // Make preferred language bold ?>
                         <strong>
                     <?php endif; ?>
@@ -84,4 +83,4 @@
         </li>
     </ul>
 
-<?php include_once __DIR__ . '/Partials/footer.php'; ?>
+<?php $this->loadPartial('footer'); ?>

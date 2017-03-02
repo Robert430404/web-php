@@ -204,10 +204,16 @@ if (!isset($headerConfig["languages"])) {
 <?php endif; ?>
 
 
-<?php if (isset($headerConfig['intro']) && $headerConfig['intro'] === true):?>
+<?php if (isset($headerConfig['intro']) && $headerConfig['intro']):?>
     <div id="intro" class="clearfix">
         <div class="container">
-            <?php echo $intro; ?>
+            <?php
+                switch ($page) {
+                    case 'homepage' :
+                        $this->loadPartial('Intros/homepageIntro');
+                        break;
+                };
+            ?>
         </div>
     </div>
 <?php endif;?>

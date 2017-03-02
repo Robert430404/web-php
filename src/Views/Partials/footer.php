@@ -1,12 +1,11 @@
 </section><!-- layout-content -->
-<?php
-if (!empty($footerConfig['spanning-content'])) {
-    print "<div class='spanning-content'>";
-    print $footerConfig['spanning-content'];
-    print "</div>";
-}
 
-?>
+<?php if (!empty($footerConfig['spanning-content'])) : ?>
+    <div class='spanning-content'>
+        <?php echo $footerConfig['spanning-content']; ?>
+    </div>
+<?php endif; ?>
+
 <?php if (!empty($footerConfig['related_menu']) || !empty($footerConfig['related_menu_deprecated'])): ?>
     <aside class='layout-menu'>
 
@@ -51,9 +50,17 @@ if (!empty($footerConfig['spanning-content'])) {
     </aside>
 <?php endif; ?>
 
-<?php if (isset($footerConfig['sidebar']) && $footerConfig['sidebar'] === true): ?>
+<?php if (isset($footerConfig['sidebar']) && $footerConfig['sidebar']): ?>
     <aside class="tips">
-        <div class="inner"><?php echo $sidebar; ?></div>
+        <div class="inner">
+            <?php
+                switch ($page) {
+                    case 'homepage' :
+                        $this->loadPartial('Sidebars/homepageSidebar');
+                        break;
+                };
+            ?>
+        </div>
     </aside>
 <?php endif; ?>
 

@@ -9,6 +9,8 @@ namespace Services\Templates;
  */
 class Renderer
 {
+    private $viewVariables;
+
     /**
      * Renderer constructor.
      */
@@ -24,12 +26,23 @@ class Renderer
      */
     public function render($template, $variables = array())
     {
-        extract($variables, EXTR_SKIP);
+        $this->viewVariables = $variables;
 
+        extract($this->viewVariables, EXTR_SKIP);
         ob_start();
-
         include_once __DIR__ . '/../../Views/' . $template . '.php';
-
         ob_end_flush();
+    }
+
+    /**
+     * Loads A Partial
+     *
+     * @param $partial
+     * @return mixed
+     */
+    public function loadPartial($partial)
+    {
+        extract($this->viewVariables, EXTR_SKIP);
+        include_once __DIR__ . '/../../Views/Partials/' . $partial . '.php';
     }
 }

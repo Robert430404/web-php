@@ -13,12 +13,12 @@ use Services\Cache\Modified;
 use Services\Mappers\HomepageMappers;
 use Services\Templates\Renderer;
 
-$renderer             = new Renderer();
-$mapper               = new HomepageMappers();
-$modified             = new Modified();
-$frontpage            = $mapper->mapNewsEntries($NEWS_ENTRIES);
-$announcements        = $mapper->mapAnnouncements($CONF_TEASER);
-$tsstring             = $mapper->getTimestampString();
+$renderer      = new Renderer();
+$mapper        = new HomepageMappers();
+$modified      = new Modified();
+$frontpage     = $mapper->mapNewsEntries($NEWS_ENTRIES);
+$announcements = $mapper->mapAnnouncements($CONF_TEASER);
+$tsstring      = $mapper->getTimestampString();
 
 $modified->checkModifiedHeaders($tsstring);
 mirror_setcookie("LAST_NEWS", $_SERVER["REQUEST_TIME"], 60*60*24*365);
@@ -49,7 +49,6 @@ $renderer->render('homepage', array(
                 "href"  => $MYSITE . "releases/feed.php",
                 "title" => "PHP Release feed"
             ),
-
         ),
         'css'   => array('home.css'),
         'intro' => true
@@ -57,6 +56,7 @@ $renderer->render('homepage', array(
     'footerConfig'  => array(
         "atom"       => "/feed.atom", // Add a link to the feed at the bottom
         'elephpants' => true,
-        'sidebar'    => true
+        'sidebar'    => true,
     ),
+    'page'          => 'homepage',
 ));
