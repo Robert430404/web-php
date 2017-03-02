@@ -1,18 +1,18 @@
     </section><!-- layout-content -->
     <?php
-    if (!empty($config['spanning-content'])) {
+    if (!empty($headerConfig['spanning-content'])) {
         print "<div class='spanning-content'>";
-        print $config['spanning-content'];
+        print $headerConfig['spanning-content'];
         print "</div>";
     }
 
     ?>
-<?php if (!empty($config['related_menu']) || !empty($config['related_menu_deprecated'])): ?>
+<?php if (!empty($headerConfig['related_menu']) || !empty($headerConfig['related_menu_deprecated'])): ?>
     <aside class='layout-menu'>
     
         <ul class='parent-menu-list'>
-            <?php if (!empty($config['related_menu'])): ?>
-            <?php foreach($config['related_menu'] as $section): ?>
+            <?php if (!empty($headerConfig['related_menu'])): ?>
+            <?php foreach($headerConfig['related_menu'] as $section): ?>
             <li>
                 <a href="<?php echo $section['link']; ?>"><?php echo $section['title']; ?></a>
     
@@ -35,11 +35,11 @@
             <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php if (!empty($config['related_menu_deprecated'])): ?>
+            <?php if (!empty($headerConfig['related_menu_deprecated'])): ?>
             <li>
                 <span class="header">Deprecated</span>
                 <ul class="child-menu-list">
-                <?php foreach ($config['related_menu_deprecated'] as $item): ?>
+                <?php foreach ($headerConfig['related_menu_deprecated'] as $item): ?>
                     <li class="<?php echo ($item['current']) ? 'current' : ''; ?>">
                         <a href="<?php echo $item['link']; ?>" title="<?php echo $item['title']; ?>"><?php echo $item['title']; ?></a>
                     </li>
@@ -51,9 +51,9 @@
     </aside>
 <?php endif; ?>
 
-<?php if (!empty($config['sidebar'])): ?>
+<?php if (!empty($headerConfig['sidebar'])): ?>
 <aside class="tips">
-    <div class="inner"><?php echo $config['sidebar']; ?></div>
+    <div class="inner"><?php echo $headerConfig['sidebar']; ?></div>
 </aside>
 <?php endif; ?>
 
@@ -77,7 +77,7 @@
     <?php
     // if elephpants enabled, insert placeholder nodes
     // to be populated with images via javascript.
-    if (isset($config['elephpants']) && $config['elephpants']) {
+    if (isset($headerConfig['elephpants']) && $headerConfig['elephpants']) {
         print "<div class='elephpants'><div class=images></div></div>";
     }
     ?>

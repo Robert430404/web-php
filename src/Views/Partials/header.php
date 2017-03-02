@@ -1,5 +1,39 @@
 <?php
 /* $Id$ */
+$defaults = array(
+    "lang" => myphpnet_language(),
+    "current" => "",
+    "meta-navigation" => array(),
+    'classes' => '',
+    'layout_span' => 9,
+    "cache"       => false,
+    "headsup"     => "",
+);
+
+$headerConfig = array_merge($defaults, $headerConfig);
+
+$headerConfig["headsup"] = get_news_changes();
+if (!$headerConfig["headsup"]) {
+    $headerConfig["headsup"] = get_near_usergroups();
+}
+
+$lang = language_convert($headerConfig["lang"]);
+$curr = $headerConfig["current"];
+$classes = $headerConfig['classes'];
+
+if (isset($_COOKIE["MD"]) || isset($_GET["MD"])) {
+    $classes .= "markdown-content";
+    $headerConfig["css_overwrite"] = array("/styles/i-love-markdown.css");
+}
+
+if (empty($pageTitle)) {
+    $pageTitle = "Hypertext Preprocessor";
+}
+
+// shorturl; http://wiki.snaplog.com/short_url
+if (isset($_SERVER['BASE_PAGE']) && $shortname = get_shortname($_SERVER["BASE_PAGE"])) {
+    $shorturl = "http://php.net/" . $shortname;
+}
 
 $css_files = array(
     '/fonts/Fira/fira.css',
@@ -8,11 +42,11 @@ $css_files = array(
     '/styles/theme-medium.css',
 );
 
-if (isset($config['css'])) {
-    $css_files = array_merge($css_files, (array) $config['css']);
+if (isset($headerConfig['css'])) {
+    $css_files = array_merge($css_files, (array) $headerConfig['css']);
 }
-if (isset($config["css_overwrite"])) {
-    $css_files = $config["css_overwrite"];
+if (isset($headerConfig["css_overwrite"])) {
+    $css_files = $headerConfig["css_overwrite"];
 }
 
 foreach($css_files as $filename) {
@@ -30,9 +64,9 @@ if (isset($shortname) && $shortname) {
     header("Link: <$shorturl>; rel=shorturl");
 }
 
-if ($config["cache"]) {
-    if (is_numeric($config["cache"])) {
-        $timestamp = $config["cache"];
+if ($headerConfig["cache"]) {
+    if (is_numeric($headerConfig["cache"])) {
+        $timestamp = $headerConfig["cache"];
     } else {
         $timestamp = filemtime($_SERVER["DOCUMENT_ROOT"] . "/" .$_SERVER["BASE_PAGE"]);
     }
@@ -44,8 +78,8 @@ if ($config["cache"]) {
     }
     header("Last-Modified: " . $tsstring);
 }
-if (!isset($config["languages"])) {
-    $config["languages"] = array();
+if (!isset($headerConfig["languages"])) {
+    $headerConfig["languages"] = array();
 }
 
 ?>
@@ -56,7 +90,7 @@ if (!isset($config["languages"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PHP: <?php echo $title ?></title>
+    <title>PHP: <?php echo $pageTitle ?></title>
 
     <link rel="shortcut icon" href="<?php echo $MYSITE ?>favicon.ico">
     <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
@@ -71,12 +105,12 @@ if (!isset($config["languages"])) {
         <?php endif ?>
     <?php endif ?>
 
-    <?php foreach($config["meta-navigation"] as $rel => $page): ?>
+    <?php foreach($headerConfig["meta-navigation"] as $rel => $page): ?>
         <link rel="<?php echo $rel ?>" href="<?php echo $MYSITE ?><?php echo $page ?>">
     <?php endforeach ?>
 
-    <?php foreach($config["languages"] as $code): ?>
-        <link rel="alternate" href="<?php echo $MYSITE ?>manual/<?php echo $code?>/<?php echo $config["thispage"] ?>" hreflang="<?php echo $code?>">
+    <?php foreach($headerConfig["languages"] as $code): ?>
+        <link rel="alternate" href="<?php echo $MYSITE ?>manual/<?php echo $code?>/<?php echo $headerConfig["thispage"] ?>" hreflang="<?php echo $code?>">
     <?php endforeach ?>
 
     <?php foreach($CSS as $filename => $modified): ?>
@@ -126,8 +160,8 @@ if (!isset($config["languages"])) {
     </div>
     <div id="flash-message"></div>
 </nav>
-<?php if (!empty($config["headsup"])): ?>
-    <div class="headsup"><?php echo $config["headsup"]?></div>
+<?php if (!empty($headerConfig["headsup"])): ?>
+    <div class="headsup"><?php echo $headerConfig["headsup"]?></div>
 <?php endif ?>
 <nav id="trick"><div><?php doc_toc("en") ?></div></nav>
 <div id="goto">
@@ -137,26 +171,26 @@ if (!isset($config["languages"])) {
     </div>
 </div>
 
-<?php if (!empty($config['breadcrumbs'])): ?>
+<?php if (!empty($headerConfig['breadcrumbs'])): ?>
     <div id="breadcrumbs" class="clearfix">
         <div id="breadcrumbs-inner">
-            <?php if (isset($config['next'])): ?>
+            <?php if (isset($headerConfig['next'])): ?>
                 <div class="next">
-                    <a href="<?php echo $config['next'][0]; ?>">
-                        <?php echo $config['next'][1]; ?> &raquo;
+                    <a href="<?php echo $headerConfig['next'][0]; ?>">
+                        <?php echo $headerConfig['next'][1]; ?> &raquo;
                     </a>
                 </div>
             <?php endif; ?>
-            <?php if (isset($config['prev'])): ?>
+            <?php if (isset($headerConfig['prev'])): ?>
                 <div class="prev">
-                    <a href="<?php echo $config['prev'][0]; ?>">
-                        &laquo; <?php echo $config['prev'][1]; ?>
+                    <a href="<?php echo $headerConfig['prev'][0]; ?>">
+                        &laquo; <?php echo $headerConfig['prev'][1]; ?>
                     </a>
                 </div>
             <?php endif; ?>
             <ul>
                 <?php
-                $breadcrumbs = $config['breadcrumbs'];
+                $breadcrumbs = $headerConfig['breadcrumbs'];
                 $last = array_pop($breadcrumbs);
                 foreach ($breadcrumbs as $crumb) {
                     echo "      <li><a href='{$crumb['link']}'>{$crumb['title']}</a></li>";
@@ -170,10 +204,10 @@ if (!isset($config["languages"])) {
 <?php endif; ?>
 
 
-<?php if (!empty($config['intro'])):?>
+<?php if ($headerConfig['intro'] === true):?>
     <div id="intro" class="clearfix">
         <div class="container">
-            <?php echo $config['intro'];?>
+            <?php echo $intro; ?>
         </div>
     </div>
 <?php endif;?>
