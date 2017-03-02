@@ -1,6 +1,8 @@
 <?php // vim: et
 
 require_once __DIR__ . '/../src/autoloader.php';
+
+$_SERVER['BASE_PAGE'] = 'index.php';
 include_once __DIR__ . '/include/pregen-news.inc';
 include_once __DIR__ . '/include/pregen-confs.inc';
 include_once __DIR__ . '/include/prepend.inc';
@@ -11,7 +13,6 @@ use Services\Cache\Modified;
 use Services\Mappers\HomepageMappers;
 use Services\Templates\Renderer;
 
-$_SERVER['BASE_PAGE'] = 'index.php';
 $renderer             = new Renderer();
 $mapper               = new HomepageMappers();
 $modified             = new Modified();
@@ -21,7 +22,7 @@ $tsstring             = $mapper->getTimestampString();
 
 $modified->checkModifiedHeaders($tsstring);
 mirror_setcookie("LAST_NEWS", $_SERVER["REQUEST_TIME"], 60*60*24*365);
-$renderer->render('homepage.php', array(
+$renderer->render('homepage', array(
     'MYSITE'        => $MYSITE,
     'frontpage'     => $frontpage,
     'announcements' => $announcements,

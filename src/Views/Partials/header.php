@@ -204,7 +204,7 @@ if (!isset($headerConfig["languages"])) {
 <?php endif; ?>
 
 
-<?php if ($headerConfig['intro'] === true):?>
+<?php if (isset($headerConfig['intro']) && $headerConfig['intro'] === true):?>
     <div id="intro" class="clearfix">
         <div class="container">
             <?php echo $intro; ?>

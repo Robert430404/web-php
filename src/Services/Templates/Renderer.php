@@ -28,7 +28,7 @@ class Renderer
 
         ob_start();
 
-        include_once __DIR__ . "/../../Views/$template";
+        include_once __DIR__ . '/../../Views/' . $template . '.php';
 
         ob_end_flush();
     }
