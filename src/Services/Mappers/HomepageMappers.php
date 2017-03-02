@@ -26,7 +26,6 @@ class HomepageMappers
      */
     public function mapNewsEntries($entries)
     {
-        //new DateTime($entry['updated']);
         $releasenews = 0;
         $frontpage   = array();
 
