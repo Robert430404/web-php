@@ -5,7 +5,7 @@ This is the git repo for the official www.php.net website.
 To setup a local mirror of the website:
 
     $ git clone https://github.com/php/web-php.git
-	$ cd web-php
+	$ cd web-php/public
 	$ php -S localhost:8080 .router.php
 
 
