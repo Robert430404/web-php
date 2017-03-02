@@ -84,4 +84,4 @@
         </li>
     </ul>
 
-<?php site_footer();
+<?php include_once __DIR__ . '/Partials/footer.php'; ?>
