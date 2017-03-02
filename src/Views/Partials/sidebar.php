@@ -1,3 +1,3 @@
 <aside class="tips">
-    <div class="inner"><?php echo $SIDEBAR; ?></div>
+    <div class="inner"><?php echo $sidebar; ?></div>
 </aside>
