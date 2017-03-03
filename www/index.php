@@ -25,6 +25,10 @@ $renderer->render('homepage', array(
     'MYSITE'        => $MYSITE,
     'frontpage'     => $frontpage,
     'announcements' => $announcements,
+    'conferenceType' => array(
+        'conference' => 'Upcoming conferences',
+        'cfp'        => 'Conferences calling for papers',
+    ),
     'pageTitle'     => 'Hypertext Preprocessor',
     'headerConfig'  => array(
         'current' => 'home',

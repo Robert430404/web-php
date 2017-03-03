@@ -69,48 +69,19 @@ class HomepageMappers
      * for the homepage sidebar partial. It takes care of configuring
      * what announcements we want, and any mutations we need to perform.
      *
-     * TODO: get the compilation of the HTML into the partial
-     *
      * @param $rawAnnouncements
-     * @return string
+     * @return array
      */
     public function mapAnnouncements($rawAnnouncements)
     {
         if (is_array($rawAnnouncements)) {
-            $conferenceType = array(
-                'conference' => 'Upcoming conferences',
-                'cfp'        => 'Conferences calling for papers',
-            );
-            $announcements  = "";
+            $announcements  = array();
 
             foreach($rawAnnouncements as $category => $entries) {
                 if ($entries) {
-                    $announcements .= '
-                      <div class="panel">
-                        <a href="/conferences" class="headline" title="' . $conferenceType[$category] . '">'
-                          . $conferenceType[$category] .
-                        '</a>
-                        <div class="body">
-                          <ul>';
-
-                    foreach (array_slice($entries, 0, 4) as $url => $title) {
-                        $title          = preg_replace("'([A-Za-z0-9])([\s\:\-\,]*?)call for(.*?)$'i", "$1", $title);
-                        $announcements .= "
-                          <li>
-                            <a href='$url' title='$title'>
-                              $title
-                            </a>
-                          </li>";
-                    }
-
-                    $announcements .= '
-                        </ul>
-                      </div>
-                    </div>';
+                    $announcements[$category] = $entries;
                 }
             }
-        } else {
-            $announcements = '';
         }
 
         return $announcements;
