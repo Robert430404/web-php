@@ -9,7 +9,8 @@
         <ul>
             <?php foreach (get_active_branches() as $major => $releases) : ?>
                 <?php foreach ((array)$releases as $release) :
-                    $version = $release['version'];
+
+                    $version                 = $release['version'];
                     list($major, $minor, $_) = explode('.', $version);
                 ?>
                     <li>

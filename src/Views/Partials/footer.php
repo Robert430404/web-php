@@ -61,6 +61,9 @@
                     case 'get-involved.php' :
                         $this->loadPartial('Sidebars/getInvolvedSidebar');
                         break;
+                    case 'support.php' :
+                        $this->loadPartial('Sidebars/supportSidebar');
+                        break;
                 };
             ?>
         </div>
