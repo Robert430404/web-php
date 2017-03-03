@@ -17,7 +17,7 @@ $modified      = new Modified();
 
 $frontpage     = $mapper->mapNewsEntries($NEWS_ENTRIES);
 $announcements = $mapper->mapAnnouncements($CONF_TEASER);
-$tsstring      = $mapper->getTimestampString();
+$tsstring      = $modified->getTimestampString();
 
 $modified->checkModifiedHeaders($tsstring);
 mirror_setcookie("LAST_NEWS", $_SERVER["REQUEST_TIME"], 60*60*24*365);
@@ -58,4 +58,5 @@ $renderer->render('homepage', array(
         'sidebar'    => true,
     ),
     'page'          => 'index.php',
+    'shortname'     => false,
 ));

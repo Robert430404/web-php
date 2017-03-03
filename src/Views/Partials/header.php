@@ -31,7 +31,7 @@ if (empty($pageTitle)) {
 }
 
 // shorturl; http://wiki.snaplog.com/short_url
-if (isset($_SERVER['BASE_PAGE']) && $shortname = get_shortname($_SERVER["BASE_PAGE"])) {
+if (isset($page) && $shortname = get_shortname($page)) {
     $shorturl = "http://php.net/" . $shortname;
 }
 
