@@ -11,9 +11,9 @@ use Services\Cache\Modified;
 use Services\Mappers\HomepageMappers;
 use Services\Templates\Renderer;
 
-$renderer      = new Renderer();
-$mapper        = new HomepageMappers();
-$modified      = new Modified();
+$renderer = new Renderer();
+$mapper   = new HomepageMappers();
+$modified = new Modified();
 
 $frontpage     = $mapper->mapNewsEntries($NEWS_ENTRIES);
 $announcements = $mapper->mapAnnouncements($CONF_TEASER);

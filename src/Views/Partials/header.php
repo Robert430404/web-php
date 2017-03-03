@@ -50,15 +50,14 @@ if (isset($headerConfig["css_overwrite"])) {
 }
 
 foreach($css_files as $filename) {
-    // files that do not start with / are assumed to be located in the /styles
-    // directory
+    // files that do not start with / are assumed to be located in the /styles directory
     if ($filename[0] !== '/') {
         $filename = "/styles/$filename";
     }
-    $path = dirname(__DIR__) . $filename;
+
+    $path           = __DIR__ . '/../../../public' . $filename;
     $CSS[$filename] = @filemtime($path);
 }
-
 
 if (isset($shortname) && $shortname) {
     header("Link: <$shorturl>; rel=shorturl");
@@ -86,12 +85,9 @@ if (!isset($headerConfig["languages"])) {
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $lang?>">
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>PHP: <?php echo $pageTitle ?></title>
-
     <link rel="shortcut icon" href="<?php echo $MYSITE ?>favicon.ico">
     <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
     <link rel="alternate" type="application/atom+xml" href="<?php echo $MYSITE ?>releases/feed.php" title="PHP Release feed">
@@ -117,23 +113,7 @@ if (!isset($headerConfig["languages"])) {
         <link rel="stylesheet" type="text/css" href="<?php echo $MYSITE ?>cached.php?t=<?php echo $modified?>&amp;f=<?php echo $filename?>" media="screen">
     <?php endforeach ?>
 
-    <!--[if lte IE 7]>
-    <link rel="stylesheet" type="text/css" href="<?php echo $MYSITE ?>styles/workarounds.ie7.css" media="screen">
-    <![endif]-->
-
-    <!--[if lte IE 8]>
-    <script type="text/javascript">
-        window.brokenIE = true;
-    </script>
-    <![endif]-->
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" type="text/css" href="<?php echo $MYSITE ?>styles/workarounds.ie9.css" media="screen">
-    <![endif]-->
-
-    <!--[if IE]>
-    <script type="text/javascript" src="<?php echo $MYSITE ?>js/ext/html5.js"></script>
-    <![endif]-->
+    <?php $this->loadPartial('ieStyles'); ?>
 
     <?php if (!empty($_SERVER["BASE_HREF"])): ?>
         <base href="<?php echo $_SERVER["BASE_HREF"] ?>">
@@ -148,10 +128,18 @@ if (!isset($headerConfig["languages"])) {
         <div id="mainmenu-toggle-overlay"></div>
         <input type="checkbox" id="mainmenu-toggle">
         <ul class="nav">
-            <li class="<?php echo $curr == "downloads" ? "active" : ""?>"><a href="/downloads">Downloads</a></li>
-            <li class="<?php echo $curr == "docs" ? "active" : ""?>"><a href="/docs.php">Documentation</a></li>
-            <li class="<?php echo $curr == "community" ? "active" : ""?>"><a href="/get-involved" >Get Involved</a></li>
-            <li class="<?php echo $curr == "help" ? "active" : ""?>"><a href="/support">Help</a></li>
+            <li class="<?php echo $curr == "downloads" ? "active" : ""?>">
+                <a href="/downloads">Downloads</a>
+            </li>
+            <li class="<?php echo $curr == "docs" ? "active" : ""?>">
+                <a href="/docs.php">Documentation</a>
+            </li>
+            <li class="<?php echo $curr == "community" ? "active" : ""?>">
+                <a href="/get-involved" >Get Involved</a>
+            </li>
+            <li class="<?php echo $curr == "help" ? "active" : ""?>">
+                <a href="/support">Help</a>
+            </li>
         </ul>
         <form class="navbar-search" id="topsearch" action="/search.php">
             <input type="hidden" name="show" value="quickref">
@@ -160,10 +148,19 @@ if (!isset($headerConfig["languages"])) {
     </div>
     <div id="flash-message"></div>
 </nav>
+
 <?php if (!empty($headerConfig["headsup"])): ?>
-    <div class="headsup"><?php echo $headerConfig["headsup"]?></div>
+    <div class="headsup">
+        <?php echo $headerConfig["headsup"]?>
+    </div>
 <?php endif ?>
-<nav id="trick"><div><?php doc_toc("en") ?></div></nav>
+
+<nav id="trick">
+    <div>
+        <?php doc_toc("en") ?>
+    </div>
+</nav>
+
 <div id="goto">
     <div class="search">
         <div class="text"></div>
@@ -181,6 +178,7 @@ if (!isset($headerConfig["languages"])) {
                     </a>
                 </div>
             <?php endif; ?>
+
             <?php if (isset($headerConfig['prev'])): ?>
                 <div class="prev">
                     <a href="<?php echo $headerConfig['prev'][0]; ?>">
@@ -188,16 +186,25 @@ if (!isset($headerConfig["languages"])) {
                     </a>
                 </div>
             <?php endif; ?>
+
             <ul>
                 <?php
                 $breadcrumbs = $headerConfig['breadcrumbs'];
-                $last = array_pop($breadcrumbs);
-                foreach ($breadcrumbs as $crumb) {
-                    echo "      <li><a href='{$crumb['link']}'>{$crumb['title']}</a></li>";
-                }
-                echo "      <li><a href='{$last['link']}'>{$last['title']}</a></li>";
+                $last        = array_pop($breadcrumbs);
 
-                ?>
+                foreach ($breadcrumbs as $crumb) : ?>
+                    <li>
+                        <a href="<?php echo $crumb['link']; ?>">
+                            <?php echo $crumb['title']; ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+
+                <li>
+                    <a href="<?php echo $last['link']; ?>">
+                        <?php echo $last['title']; ?>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
