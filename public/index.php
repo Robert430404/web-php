@@ -16,6 +16,7 @@ use Services\Templates\Renderer;
 $renderer      = new Renderer();
 $mapper        = new HomepageMappers();
 $modified      = new Modified();
+
 $frontpage     = $mapper->mapNewsEntries($NEWS_ENTRIES);
 $announcements = $mapper->mapAnnouncements($CONF_TEASER);
 $tsstring      = $mapper->getTimestampString();
@@ -58,5 +59,5 @@ $renderer->render('homepage', array(
         'elephpants' => true,
         'sidebar'    => true,
     ),
-    'page'          => 'homepage',
+    'page'          => 'index.php',
 ));

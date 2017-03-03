@@ -55,7 +55,7 @@
         <div class="inner">
             <?php
                 switch ($page) {
-                    case 'homepage' :
+                    case 'index.php' :
                         $this->loadPartial('Sidebars/homepageSidebar');
                         break;
                 };

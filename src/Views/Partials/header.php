@@ -1,18 +1,18 @@
 <?php
 /* $Id$ */
 $defaults = array(
-    "lang" => myphpnet_language(),
-    "current" => "",
+    "lang"            => myphpnet_language(),
+    "current"         => "",
     "meta-navigation" => array(),
-    'classes' => '',
-    'layout_span' => 9,
-    "cache"       => false,
-    "headsup"     => "",
+    'classes'         => '',
+    'layout_span'     => 9,
+    "cache"           => false,
+    "headsup"         => "",
 );
 
-$headerConfig = array_merge($defaults, $headerConfig);
-
+$headerConfig            = array_merge($defaults, $headerConfig);
 $headerConfig["headsup"] = get_news_changes();
+
 if (!$headerConfig["headsup"]) {
     $headerConfig["headsup"] = get_near_usergroups();
 }
@@ -97,8 +97,8 @@ if (!isset($headerConfig["languages"])) {
     <link rel="alternate" type="application/atom+xml" href="<?php echo $MYSITE ?>releases/feed.php" title="PHP Release feed">
     <link rel="alternate" type="application/atom+xml" href="<?php echo $MYSITE ?>feed.atom" title="PHP: Hypertext Preprocessor">
 
-    <?php if (isset($_SERVER['BASE_PAGE'])): ?>
-        <link rel="canonical" href="http://php.net/<?php echo $_SERVER['BASE_PAGE']?>">
+    <?php if (isset($page)) : ?>
+        <link rel="canonical" href="http://php.net/<?php echo $page; ?>">
         <?php if ($shortname): ?>
             <link rel="shorturl" href="<?php echo $shorturl ?>">
             <link rel="alternate" href="<?php echo $shorturl ?>" hreflang="x-default">
@@ -209,7 +209,7 @@ if (!isset($headerConfig["languages"])) {
         <div class="container">
             <?php
                 switch ($page) {
-                    case 'homepage' :
+                    case 'index.php' :
                         $this->loadPartial('Intros/homepageIntro');
                         break;
                 };

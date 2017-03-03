@@ -18,5 +18,5 @@ $renderer->render('docs', array(
     'activeLangs'  => $ACTIVE_ONLINE_LANGUAGES,
     'LANG'         => $LANG,
     'lastlang'     => end($ACTIVE_ONLINE_LANGUAGES),
-    'page'         => 'docs',
+    'page'         => 'docs.php',
 ));
