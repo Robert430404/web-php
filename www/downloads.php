@@ -5,7 +5,7 @@ include_once __DIR__ . '/include/prepend.inc';
 include_once __DIR__ . '/include/gpg-keys.inc';
 include_once __DIR__ . '/include/version.inc';
 
-use Services\Templates\Renderer;
+use Services\Templating\Renderer;
 use Services\Cache\Modified;
 
 $renderer = new Renderer();

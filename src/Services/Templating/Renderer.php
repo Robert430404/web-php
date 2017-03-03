@@ -1,11 +1,11 @@
 <?php
 
-namespace Services\Templates;
+namespace Services\Templating;
 
 /**
  * Class Renderer
  *
- * @package Services\Templates
+ * @package Services\Templating
  */
 class Renderer
 {

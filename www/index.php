@@ -9,7 +9,7 @@ include_once __DIR__ . '/include/version.inc';
 
 use Services\Cache\Modified;
 use Services\Mappers\HomepageMappers;
-use Services\Templates\Renderer;
+use Services\Templating\Renderer;
 
 $renderer = new Renderer();
 $mapper   = new HomepageMappers();

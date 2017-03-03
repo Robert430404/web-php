@@ -5,7 +5,7 @@ $_SERVER['BASE_PAGE'] = 'support.php';
 require_once __DIR__ . '/../src/autoloader.php';
 include_once __DIR__ . '/include/prepend.inc';
 
-use Services\Templates\Renderer;
+use Services\Templating\Renderer;
 
 $renderer = new Renderer();
 
