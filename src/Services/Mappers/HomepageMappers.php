@@ -7,6 +7,10 @@ use DateTime;
 /**
  * Class HomepageMappers
  *
+ * This class is designed to standardize the procedure of mapping
+ * data for the homepage. Any thing that requires formatting so
+ * it can be used in the view should be prepared here.
+ *
  * @package Services\Mappers
  */
 class HomepageMappers
@@ -20,6 +24,10 @@ class HomepageMappers
 
     /**
      * Maps the news entries
+     *
+     * This method maps the news entry data into a usable structure
+     * for the homepage view. It takes care of configuring what
+     * entries we want, and any mutations we need to perform.
      *
      * @param $entries
      * @return array
@@ -56,6 +64,12 @@ class HomepageMappers
 
     /**
      * Maps the announcements
+     *
+     * This method maps the announcement data into a usable structure
+     * for the homepage sidebar partial. It takes care of configuring
+     * what announcements we want, and any mutations we need to perform.
+     *
+     * TODO: get the compilation of the HTML into the partial
      *
      * @param $rawAnnouncements
      * @return string

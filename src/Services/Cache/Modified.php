@@ -5,20 +5,27 @@ namespace Services\Cache;
 /**
  * Class NotModified
  *
+ * This class is designed to standardize the procedure of caching
+ * view files from the "controller" what ever that may be. This
+ * gives us a consistent method of caching content.
+ *
  * @package Services\Cache
  */
 class Modified
 {
     /**
-     * NotModified constructor.
+     * Modified constructor.
      */
     public function __construct()
     {
     }
 
     /**
-     * Check if the client has the same page cached, if no,
-     * inform the user agent what is our last modification date
+     * Checks your modified headers
+     *
+     * This method checks if the client has the same page cached locally,
+     * if no, inform the user agent of our last modification date and
+     * cache the page locally.
      *
      * @param $timeStamp
      * @return void
@@ -35,6 +42,9 @@ class Modified
 
     /**
      * Attempts to disable local caching on the page its called.
+     *
+     * This method tries to disable the local caching for the page this
+     * is called on.
      *
      * @return void
      */
@@ -61,6 +71,9 @@ class Modified
 
     /**
      * Maps the time stamps
+     *
+     * This is used to get the latest modified date for the caching
+     * method.
      *
      * @return array
      */
