@@ -58,6 +58,9 @@
                     case 'index.php' :
                         $this->loadPartial('Sidebars/homepageSidebar');
                         break;
+                    case 'get-involved.php' :
+                        $this->loadPartial('Sidebars/getInvolvedSidebar');
+                        break;
                 };
             ?>
         </div>

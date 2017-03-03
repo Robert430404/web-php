@@ -1,8 +1,6 @@
 <?php // vim: et
 
 require_once __DIR__ . '/../src/autoloader.php';
-
-$_SERVER['BASE_PAGE'] = 'index.php';
 include_once __DIR__ . '/include/pregen-news.inc';
 include_once __DIR__ . '/include/pregen-confs.inc';
 include_once __DIR__ . '/include/prepend.inc';

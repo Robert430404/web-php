@@ -1,8 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../src/autoloader.php';
-
-$_SERVER['BASE_PAGE'] = 'docs.php';
 include_once __DIR__ . '/include/prepend.inc';
 
 use Services\Templates\Renderer;
@@ -15,6 +13,7 @@ $renderer->render('docs', array(
     'headerConfig' => array(
         "current" => "docs",
     ),
+    'shortname'    => false,
     'activeLangs'  => $ACTIVE_ONLINE_LANGUAGES,
     'LANG'         => $LANG,
     'lastlang'     => end($ACTIVE_ONLINE_LANGUAGES),

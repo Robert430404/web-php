@@ -17,8 +17,8 @@ if (!$headerConfig["headsup"]) {
     $headerConfig["headsup"] = get_near_usergroups();
 }
 
-$lang = language_convert($headerConfig["lang"]);
-$curr = $headerConfig["current"];
+$lang    = language_convert($headerConfig["lang"]);
+$curr    = $headerConfig["current"];
 $classes = $headerConfig['classes'];
 
 if (isset($_COOKIE["MD"]) || isset($_GET["MD"])) {

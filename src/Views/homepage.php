@@ -21,4 +21,5 @@
         <?php endforeach; ?>
         <p class="archive"><a href="/archive/">Older News Entries</a></p>
     </div>
+
 <?php $this->loadPartial('footer'); ?>
