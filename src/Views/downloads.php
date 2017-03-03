@@ -1,45 +1,4 @@
-<?php // vim: et
-// $Id$
-$_SERVER['BASE_PAGE'] = 'downloads.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/include/prepend.inc';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/include/gpg-keys.inc';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/include/version.inc';
-
-// Try to make this page non-cached
-header_nocache();
-
-$SHOW_COUNT = 4;
-
-$SIDEBAR_DATA = '
-<div class="panel">
-  <a href="/supported-versions.php">Supported Versions</a>
-  <div class="body">
-    Check the <a href="/supported-versions.php">supported versions</a> page for
-    more information on the support lifetime of each version of PHP.
-  </div>
-</div>
-
-<p class="panel"><a href="download-docs.php">Documentation download</a></p>
-<p class="panel"><a href="download-logos.php">PHP logos</a></p>
-
-<p class="panel"><a href="/git.php">Development sources (git)</a></p>
-<p class="panel"><a href="/releases/">Old archives</a></p>
-';
-
-site_header("Downloads",
-    array(
-        'link' => array(
-            array(
-                "rel"   => "alternate",
-                "type"  => "application/atom+xml",
-                "href"  => $MYSITE . "releases/feed.php",
-                "title" => "PHP Release feed"
-            ),
-        ),
-        "current" => "downloads",
-    )
-);
-?>
+<?php $this->loadPartial('header') ?>
 <?php foreach ($RELEASES as $MAJOR => $major_releases): /* major releases loop start */
     $releases = array_slice($major_releases, 0, $SHOW_COUNT);
     ?>
@@ -113,5 +72,4 @@ site_header("Downloads",
         </a>
     </p>
 
-<?php
-site_footer(array('sidebar' => $SIDEBAR_DATA));
+<?php $this->loadPartial('footer'); ?>

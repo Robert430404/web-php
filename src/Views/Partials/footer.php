@@ -64,6 +64,9 @@
                     case 'support.php' :
                         $this->loadPartial('Sidebars/supportSidebar');
                         break;
+                    case 'downloads.php' :
+                        $this->loadPartial('Sidebars/downloadsSidebar');
+                        break;
                 };
             ?>
         </div>

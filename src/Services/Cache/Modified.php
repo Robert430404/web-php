@@ -34,6 +34,17 @@ class Modified
     }
 
     /**
+     * Attempts to disable local caching on the page its called.
+     *
+     * @return void
+     */
+    public function disablePublicCache()
+    {
+        header("Cache-Control: private");
+        header("Pragma: no-cache");
+    }
+
+    /**
      * Returns the timestamp string in GMD format
      *
      * Note that this is not a RFC 822 date (the tz is always GMT)
